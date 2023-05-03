@@ -1,0 +1,18 @@
+.msc-input {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 80%;
+  font-size: 1.2em;
+  height: 7vh;
+  min-height: 24px;
+  border-radius: 20px;
+  left: 1.3vw;
+  margin: 2vh 0;
+  animation: expand 0.3s ease-in;
+}
+
+.msc-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  padding-left: 0.5vw;
+}

@@ -1,0 +1,25 @@
+.mini-loader {
+  position: relative;
+  visibility: hidden;
+  display: inline-block;
+  right: 1.5vw;
+  translate: 0 25%;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #1f1f1f;
+  border-top: 3px solid #000000;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+.mini-loader.visible {
+  visibility: visible;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

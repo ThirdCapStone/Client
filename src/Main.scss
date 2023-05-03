@@ -1,0 +1,33 @@
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #252525;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.box-enter {
+  opacity: 0.2;
+  transform: rotateY(180deg);
+  transition: transform 0.4s ease-in, opacity 0.5s ease-in;
+}
+
+.box-enter-active {
+  opacity: 1;
+  transform: rotateY(0deg);
+  transition: transform 0.4s ease-in, opacity 0.5s ease-in;
+}
+.box-exit {
+  opacity: 1;
+  transform: rotateY(0deg);
+  transition: opacity 0.5s ease-in;
+}
+
+.box-exit-acitve {
+  opacity: 0.2;
+  transform: rotateY(180deg);
+  transition: transform 0.4s ease-in, opacity 0.5s ease-in;
+}

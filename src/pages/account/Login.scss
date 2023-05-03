@@ -1,0 +1,74 @@
+.login-box {
+  text-align: center;
+  width: 30vw;
+  min-width: 500px;
+  height: 80vh;
+  min-height: 300px;
+  background-color: rgba(29, 29, 29, 0.7);
+  border-radius: 30px;
+}
+
+.login-title {
+  position: relative;
+  top: 15%;
+  font-size: 4em;
+}
+
+.login-subtitle {
+  position: relative;
+  top: 20%;
+  font-size: 3em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.login-form {
+  position: relative;
+  top: 30%;
+}
+
+.login-form > label {
+  display: block;
+}
+
+.error {
+  font-size: 0.8em;
+  color: red;
+}
+
+.error-animation {
+  animation: warning 0.4s ease-in;
+}
+
+@keyframes warning {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-1em);
+  }
+  50% {
+    transform: translateX(1em);
+  }
+  85% {
+    transform: translateX(-1em);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (pointer: none), (pointer: coarse) {
+  .login-box {
+    width: 80vw;
+    min-width: 0;
+    height: 80vh;
+    min-height: 0;
+  }
+
+  .login-title {
+    font-size: 3em;
+  }
+  .login-subtitle {
+    font-size: 2em;
+  }
+}
