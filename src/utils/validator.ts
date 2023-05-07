@@ -28,10 +28,10 @@ const validatePWDCheck = (userPWD: string, userPWDCheck: string) => {
     if (userPWD !== userPWDCheck) {
       return "비밀번호가 일치하지 않습니다.";
     } else {
-      return result;
+      return "";
     }
   } else {
-    return "";
+    return result;
   }
 };
 
