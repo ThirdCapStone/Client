@@ -1,69 +1,52 @@
 import "./Button.scss";
 
-import { ComponentProps, Dispatch } from "react";
+import { ComponentProps, FC, PropsWithChildren } from "react";
 
 interface AccountButtonProps {
   type: "button" | "submit" | "reset" | undefined;
-  className?: string;
-  text: string;
-  disabled?: boolean;
   onClick: ComponentProps<"button">["onClick"];
+  text: string;
+  display?: string;
+  width?: string;
+  height?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  fontSize?: string;
+  disabled?: boolean;
+  className?: string;
 }
 
-const AccountButton = ({
+const AccountButton: FC<PropsWithChildren<AccountButtonProps>> = ({
   type,
+  className,
   onClick,
   text,
-  className,
-  disabled,
+  display = "inline",
+  width = "70%",
+  height = "6vh",
+  marginBottom = "0%",
+  marginLeft = "0%",
+  fontSize = "0.8em",
+  disabled = false,
 }: AccountButtonProps) => {
   return (
     <button
       type={type}
-      onClick={onClick}
       className={`msc-button ${className}`}
+      onClick={onClick}
       disabled={disabled}
+      style={{
+        fontSize: fontSize,
+        width: width,
+        height: height,
+        marginBottom: marginBottom,
+        marginLeft: marginLeft,
+        display: display,
+      }}
     >
       {text}
     </button>
   );
 };
 
-interface ToggleLoginButtonProps {
-  isSignup: boolean;
-  setIsSignup: Dispatch<boolean>;
-  setIsMount: Dispatch<boolean>;
-}
-
-const ToggleLoginButton = ({
-  isSignup,
-  setIsSignup,
-  setIsMount,
-}: ToggleLoginButtonProps) => {
-  return (
-    <div className="toggle-box">
-      <span
-        className={`toggle-button login ${isSignup ? "" : "active"}`}
-        onClick={() => {
-          setIsSignup(false);
-          setIsMount(true);
-        }}
-      >
-        <span className="toggle-button-box" />
-        로그인
-      </span>
-      <span className="space"></span>
-      <span
-        className={`toggle-button signup ${isSignup ? "active" : ""}`}
-        onClick={() => {
-          setIsSignup(true);
-          setIsMount(true);
-        }}
-      >
-        회원가입
-      </span>
-    </div>
-  );
-};
-
-export { AccountButton, ToggleLoginButton };
+export { AccountButton };

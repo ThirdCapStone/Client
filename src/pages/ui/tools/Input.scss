@@ -1,18 +1,77 @@
 .msc-input {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.1);
+  display: inline;
+  background-color: transparent;
   color: white;
-  width: 80%;
   font-size: 1.2em;
-  height: 7vh;
+  min-width: 50%;
   min-height: 24px;
-  border-radius: 20px;
-  left: 1.3vw;
-  margin: 2vh 0;
-  animation: expand 0.3s ease-in;
+  margin-bottom: 0 !important;
+}
+
+.msc-input:focus,
+.msc-input {
+  outline: none !important;
+  -border-radius: 0;
+  --border-width: 0px;
+  --outline-width: 0px;
 }
 
 .msc-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.3);
   padding-left: 0.5vw;
+  transition: color 0.2s ease-out;
+}
+
+.msc-input:disabled {
+  color: rgba(81, 241, 108, 0.7);
+}
+
+.container {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #2d2d2d;
+  transition: box-shadow 0.2s ease-out;
+}
+
+.icon {
+  padding-left: 5%;
+  font-size: 1.4em;
+  transition: filter 0.2s ease-out, color 0.2s ease-out;
+}
+
+.container:focus-within {
+  outline-style: none;
+  border: 2px solid rgb(81, 241, 108);
+  box-shadow: 1px 1px 5px 3px rgb(81, 241, 108);
+  .msc-input::placeholder {
+    color: rgba(81, 241, 108, 0.5) !important;
+  }
+  .icon {
+    filter: drop-shadow(1px 1px 3px);
+  }
+}
+
+.container:hover {
+  border: 2px solid rgb(81, 241, 108);
+}
+
+.container:focus-within {
+  .icon {
+    color: rgb(81, 241, 108);
+  }
+}
+
+.error {
+  align-self: self-start;
+  height: 1vh;
+  font-size: 0.8em;
+  color: red;
+  margin-bottom: 3vh;
+}
+
+.error-animation {
+  animation: warning 0.4s ease-in;
 }
