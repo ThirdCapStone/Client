@@ -37,7 +37,7 @@ const AccountButton: FC<PropsWithChildren<AccountButtonProps>> = ({
       disabled={disabled}
       style={{
         fontSize: fontSize,
-        width: width,
+        width: `calc(${width} - 7px)`,
         height: height,
         marginBottom: marginBottom,
         marginLeft: marginLeft,

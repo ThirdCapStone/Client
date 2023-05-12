@@ -37,8 +37,8 @@
 }
 
 .icon {
-  padding-left: 5%;
-  font-size: 1.4em;
+  padding-left: 2vw;
+  font-size: 1.6em;
   transition: filter 0.2s ease-out, color 0.2s ease-out;
 }
 
@@ -66,10 +66,11 @@
 
 .error {
   align-self: self-start;
-  height: 1vh;
+  height: 3vh;
+  margin-top: 1vh;
   font-size: 0.8em;
   color: red;
-  margin-bottom: 3vh;
+  margin-bottom: 1vh;
 }
 
 .error-animation {
