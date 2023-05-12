@@ -13,8 +13,8 @@ code {
 }
 
 .swal2-html-container {
-  margin: 0.5em 1.6em;
-  user-select: none;
+  margin: 0.5em 1.6em !important;
+  user-select: none !important;
 }
 
 .swal2-html-container hr {
@@ -30,10 +30,14 @@ code {
 
 .swal2-shown > [aria-hidden="true"] {
   transition: 0.3s filter;
-  filter: blur(4px);
+  filter: blur(4px) !important;
 
   background: black;
   overflow: hidden;
+}
+
+.swal2-toast-shown > [aria-hidden="true"] {
+  filter: blur(0px) !important;
 }
 
 .colored-toast.swal2-icon-success {
