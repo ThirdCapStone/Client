@@ -13,39 +13,9 @@
 
 .signup-box-active {
   animation: login-to-signup 0.8s ease-in-out;
-}
-
-.signup-box-active > * {
-  display: none;
-}
-
-.signup-form .msc-input {
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.id-input-container,
-.pw-input-container {
-  margin: 4px 10% 0px 10%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  background-color: #2d2d2d;
-  transition: border 0.2s linear, box-shadow 0.2s linear;
-  height: 8vh;
-}
-
-.error {
-  display: block;
-  align-items: start;
-  font-size: 0.8em;
-  color: red;
-}
-
-.error-animation {
-  animation: warning 0.4s ease-in;
+  & > * {
+    display: none;
+  }
 }
 
 @keyframes login-to-signup {
