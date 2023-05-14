@@ -1,18 +1,25 @@
 import "./Login.scss";
 
 import { useState, ComponentProps, Dispatch } from "react";
+import { Navigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { AccountInput, handleError } from "../ui/tools/Input";
 import { AccountButton } from "../ui/tools/Button";
-import { AccountLogin } from "../../utils/requester";
+import Account from "../../utils/http/account";
 import { validateID, validatePWD } from "../../utils/validator";
 import { showToast } from "../../utils/toast";
-import { forgotPassword } from "../../utils/alert";
+import withReactContent from "sweetalert2-react-content";
+
+const mySwal = withReactContent(Swal);
 
 const Login = (props: {
-  isMount: boolean;
+  isSignupMount: boolean;
+  isHomeMount: boolean;
   setIsSignup: Dispatch<boolean>;
-  setIsMount: Dispatch<boolean>;
+  setIsSignupMount: Dispatch<boolean>;
+  setIsHomeMount: Dispatch<boolean>;
+  setIsLogined: Dispatch<boolean>;
 }) => {
   const [userID, setUserID] = useState("");
   const [userPWD, setUserPWD] = useState("");
@@ -39,11 +46,11 @@ const Login = (props: {
     } else if (validatePWD(userPWD) !== "") {
       handleError("pwd", setChatPWD);
     } else {
-      const response = await AccountLogin(userID, userPWD);
+      const response = await Account.login(userID, userPWD);
       const message = response.data["message"];
       switch (response.status) {
         case 200:
-          showToast("success", message);
+          changeToHome(message);
           break;
         case 401:
           showToast("warning", message);
@@ -60,14 +67,28 @@ const Login = (props: {
 
   const changeToSignup: ComponentProps<"button">["onClick"] = (event) => {
     props.setIsSignup(true);
-    props.setIsMount(true);
+    props.setIsSignupMount(true);
     setTimeout(() => {
-      props.setIsMount(false);
+      props.setIsSignupMount(false);
+    }, 800);
+  };
+
+  const changeToHome = (message: string) => {
+    showToast("success", message);
+    props.setIsHomeMount(true);
+    props.setIsLogined(true);
+    setTimeout(() => {
+      props.setIsHomeMount(false);
     }, 800);
   };
 
   return (
-    <div className={`login-box ${props.isMount ? `login-box-active` : ``}`}>
+    <div
+      className={`login-box ${props.isSignupMount ? `login-box-signup` : ``} ${
+        props.isHomeMount ? `login-box-home` : ``
+      }`}
+    >
+      {props.isHomeMount ? <Navigate to="/home" replace /> : null}
       <div className="login-title">Login</div>
       <form className="login-form" onKeyDown={detectEnter}>
         <AccountInput
@@ -101,11 +122,14 @@ const Login = (props: {
         <div
           className="forgot"
           onClick={() => {
-            forgotPassword();
+            mySwal.fire({
+              html: <Custom />,
+            });
           }}
         >
           비밀번호를 잊으셨나요?
         </div>
+
         <AccountButton
           type="submit"
           className="outline"
@@ -118,7 +142,6 @@ const Login = (props: {
           disabled={clicked}
         />
         <br />
-        <br />
         <div>
           계정이 아직 없으신가요? &nbsp;
           <span className="signup" onClick={changeToSignup}>
@@ -128,5 +151,9 @@ const Login = (props: {
       </form>
     </div>
   );
+};
+
+const Custom = () => {
+  return <div>Hello World</div>;
 };
 export default Login;

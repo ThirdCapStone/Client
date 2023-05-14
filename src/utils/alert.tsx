@@ -1,7 +1,14 @@
 import "./alert.scss";
+import { AccountInput } from "../pages/ui/tools/Input";
+import { AccountButton } from "../pages/ui/tools/Button";
+import withReactContent from "sweetalert2-react-content";
+import { faCertificate } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import Account from "./http/account";
 
 type iconType = "success" | "warning" | "error" | "info" | "question";
+
+const MySwal = withReactContent(Swal);
 
 const showAlert = (
   title: string,
@@ -12,7 +19,7 @@ const showAlert = (
   timer: number = 1000,
   timerProgressBar: boolean = false
 ) => {
-  Swal.fire({
+  MySwal.fire({
     html: `<hr /><p>${text}`,
     title: title,
     icon: icon,
@@ -25,29 +32,66 @@ const showAlert = (
   });
 };
 
-const showInputAlert = (
+const showForgotPWDAlert = async (
   title: string,
   text: string,
   icon: iconType,
   confirmButtonText: string,
   timer: number,
   width: number = 600,
-  timerProgressBar: boolean = false,
-  inputPlaceholder: string = "인증코드"
+  timerProgressBar: boolean = false
+) => {};
+
+const showEmailALert = async (
+  email: string,
+  title: string,
+  text: string,
+  icon: iconType,
+  confirmButtonText: string,
+  timer: number,
+  width: number = 600,
+  timerProgressBar: boolean = false
 ) => {
   let timerInterval: string | number | NodeJS.Timer | undefined;
-  console.log(timer);
-  Swal.fire({
-    title: `${title}`,
+  let isChat: boolean = false;
+  let verifyCode: string = "";
+
+  await MySwal.fire({
     icon: icon,
-    html: `<hr /><p>${text}<div>남은 시간: <b class="left-time">${inputAlertTimer(
-      timer
-    )}</b></div>`,
-    confirmButtonText: confirmButtonText,
-    input: "text",
+    html: (
+      <div>
+        <h1 style={{ color: "white" }}>{title}</h1>
+        <hr style={{ backgroundColor: "white" }} />
+        {text}
+        {
+          <AccountInput
+            type="text"
+            className="verifyCode"
+            icon={faCertificate}
+            placeholder="인증코드 (6자리)"
+            marginTop="5%"
+            onChange={(event) => {
+              verifyCode = event.target.value;
+            }}
+            isChat={isChat}
+            onBlur={() => (isChat = false)}
+            onFocus={() => (isChat = true)}
+          />
+        }
+        남은 시간: <b className="left-time">{inputAlertTimer(timer)}</b>
+        <AccountButton
+          display="block"
+          marginLeft="15%"
+          type="submit"
+          marginTop="5%"
+          text={confirmButtonText}
+          onClick={() => MySwal.close()}
+        />
+      </div>
+    ),
+    showCloseButton: true,
+    showConfirmButton: false,
     width: width,
-    inputPlaceholder: inputPlaceholder,
-    inputAutoFocus: true,
     timer: timer,
     timerProgressBar: timerProgressBar,
     didOpen: () => {
@@ -61,6 +105,10 @@ const showInputAlert = (
       clearInterval(timerInterval);
     },
   });
+
+  console.log("detected");
+
+  return await Account.verifyEmail(email, verifyCode);
 };
 
 const minTwoDigits = (n: number) => {
@@ -71,13 +119,7 @@ const inputAlertTimer = (miliseconds: number) => {
   const seconds = Number(Math.floor(miliseconds / 1000).toFixed(0));
   const minutes = Number(Math.floor(seconds / 60).toFixed(0));
 
-  return `${minutes}: ${minTwoDigits(seconds % 60)}`;
+  return `${minutes}:${minTwoDigits(seconds % 60)}`;
 };
 
-const forgotPassword = () => {
-  Swal.fire({
-    html: `<div>hello world</div>`,
-  });
-};
-
-export { showAlert, showInputAlert, inputAlertTimer, forgotPassword };
+export { showAlert, showEmailALert, inputAlertTimer };

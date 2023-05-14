@@ -10,12 +10,8 @@ import {
   validatePhone,
 } from "../../utils/validator";
 import { showToast } from "../../utils/toast";
-import { showInputAlert } from "../../utils/alert";
-import {
-  AccountSignup,
-  AccountCheckDuplicate,
-  AccountSendEmail,
-} from "../../utils/requester";
+import { showEmailALert } from "../../utils/alert";
+import Account from "../../utils/http/account";
 import { AccountInput, handleError } from "../ui/tools/Input";
 import { AccountButton } from "../ui/tools/Button";
 import {
@@ -73,7 +69,7 @@ const Signup = (props: {
     } else if (!verifiedNickname) {
       showToast("warning", "닉네임 중복확인을 해주세요");
     } else {
-      const response = await AccountSignup(
+      const response = await Account.signup(
         userID,
         userPWD,
         userNickname,
@@ -102,7 +98,7 @@ const Signup = (props: {
     inputUserID: string = "",
     inputUserEmail: string = ""
   ) => {
-    const response = await AccountCheckDuplicate(inputUserID, inputUserEmail);
+    const response = await Account.checkDuplicate(inputUserID, inputUserEmail);
     const message = response.data["message"];
     console.log(response);
     switch (response.status) {
@@ -250,20 +246,29 @@ const Signup = (props: {
                 let leftTime = 1000 * 60 * 3;
                 e.preventDefault();
                 if (validateEmail(userEmail) == "") {
-                  await AccountSendEmail(userEmail);
-                  showInputAlert(
+                  await Account.sendEmail(userEmail);
+                  const response = await showEmailALert(
+                    userEmail,
                     "이메일확인",
                     "이메일을 입력해주세요",
                     "question",
-                    "확인",
+                    "제출하기",
                     leftTime,
                     600,
-                    false,
-                    "인증 코드(100자리)"
+                    false
                   );
-                  setInterval(() => {
-                    leftTime -= 1000;
-                  });
+                  console.log(response);
+                  const message = response.data["message"];
+                  switch (response.status) {
+                    case 200:
+                      showToast("success", message);
+                      break;
+                    case 401:
+                      showToast("warning", message);
+                      break;
+                    case 500:
+                      showToast("error", message);
+                  }
                 } else {
                   handleError("email", setChatEmail);
                 }
