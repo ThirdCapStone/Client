@@ -158,7 +158,7 @@ const Signup = (props: {
           }
           value={userID}
           isChat={chatID}
-          validate={validateID}
+          validate={validateID(userID)}
           onChange={(event) => setUserID(event.target.value)}
           onBlur={() => setChatID(false)}
           onFocus={() => setChatID(true)}
@@ -173,7 +173,7 @@ const Signup = (props: {
           placeholder="비밀번호"
           value={userPWD}
           isChat={chatPWD}
-          validate={validatePWD}
+          validate={validatePWD(userPWD)}
           onChange={(event) => setUserPWD(event.target.value)}
           onBlur={() => setChatPWD(false)}
           onFocus={() => setChatPWD(true)}
@@ -186,7 +186,7 @@ const Signup = (props: {
           placeholder="비밀번호 재입력"
           value={userPWDCheck}
           isChat={chatPWDCheck}
-          validate={() => validatePWDCheck(userPWD, userPWDCheck)}
+          validate={validatePWDCheck(userPWD, userPWDCheck)}
           onChange={(event) => setUserPWDCheck(event.target.value)}
           onBlur={() => setChatPWDCheck(false)}
           onFocus={() => setChatPWDCheck(true)}
@@ -199,7 +199,7 @@ const Signup = (props: {
           placeholder="닉네임"
           value={userNickname}
           isChat={chatNickname}
-          validate={validateNickname}
+          validate={validateNickname(userNickname)}
           VerifyButton={
             <AccountButton
               type="button"
@@ -234,7 +234,7 @@ const Signup = (props: {
           placeholder="이메일 (someone@example.com)"
           value={userEmail}
           isChat={chatEmail}
-          validate={validateEmail}
+          validate={validateEmail(userEmail)}
           VerifyButton={
             <AccountButton
               type="button"
@@ -254,10 +254,8 @@ const Signup = (props: {
                     "question",
                     "제출하기",
                     leftTime,
-                    600,
                     false
                   );
-                  console.log(response);
                   const message = response.data["message"];
                   switch (response.status) {
                     case 200:
@@ -288,7 +286,7 @@ const Signup = (props: {
           placeholder="전화번호 (000-0000-0000)"
           value={userPhone}
           isChat={chatPhone}
-          validate={validatePhone}
+          validate={validatePhone(userPhone)}
           onChange={(event) => setUserPhone(event.target.value)}
           onBlur={() => setChatPhone(false)}
           onFocus={() => setChatPhone(true)}

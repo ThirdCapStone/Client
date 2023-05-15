@@ -1,10 +1,9 @@
 import axios from "axios";
-
-const HOST_URL = "http://15.164.100.29";
+const HOST_URL = "http://movies_combine.rainbow5079.me:8000";
 const headers = {
   "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": "*",
 };
+axios.defaults.withCredentials = true;
 
 class Account {
   static login = async (userID: string, userPWD: string) => {

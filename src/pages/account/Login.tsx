@@ -4,6 +4,7 @@ import { useState, ComponentProps, Dispatch } from "react";
 import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
+import { showForgotPWDAlert } from "../../utils/alert";
 import { AccountInput, handleError } from "../ui/tools/Input";
 import { AccountButton } from "../ui/tools/Button";
 import Account from "../../utils/http/account";
@@ -16,10 +17,12 @@ const mySwal = withReactContent(Swal);
 const Login = (props: {
   isSignupMount: boolean;
   isHomeMount: boolean;
+  isLoginMount: boolean;
   setIsSignup: Dispatch<boolean>;
   setIsSignupMount: Dispatch<boolean>;
   setIsHomeMount: Dispatch<boolean>;
   setIsLogined: Dispatch<boolean>;
+  setIsLoginMount: Dispatch<boolean>;
 }) => {
   const [userID, setUserID] = useState("");
   const [userPWD, setUserPWD] = useState("");
@@ -82,10 +85,12 @@ const Login = (props: {
     }, 800);
   };
 
+  let testChat = false;
+  let testID = "";
   return (
     <div
       className={`login-box ${props.isSignupMount ? `login-box-signup` : ``} ${
-        props.isHomeMount ? `login-box-home` : ``
+        props.isLoginMount ? `login-box-home` : ``
       }`}
     >
       {props.isHomeMount ? <Navigate to="/home" replace /> : null}
@@ -98,7 +103,7 @@ const Login = (props: {
           className="id"
           value={userID}
           isChat={chatID}
-          validate={validateID}
+          validate={validateID(userID)}
           onChange={(event) => {
             setUserID(event.target.value);
           }}
@@ -112,7 +117,7 @@ const Login = (props: {
           className="pwd"
           value={userPWD}
           isChat={chatPWD}
-          validate={validatePWD}
+          validate={validatePWD(userPWD)}
           onChange={(event) => {
             setUserPWD(event.target.value);
           }}
@@ -121,10 +126,13 @@ const Login = (props: {
         />
         <div
           className="forgot"
-          onClick={() => {
-            mySwal.fire({
-              html: <Custom />,
-            });
+          onClick={async () => {
+            await showForgotPWDAlert(
+              "비밀번호 찾기",
+              "비밀번호를 변경하세요.",
+              "question",
+              "변경하기"
+            );
           }}
         >
           비밀번호를 잊으셨나요?

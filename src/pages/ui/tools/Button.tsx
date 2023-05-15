@@ -9,6 +9,7 @@ interface AccountButtonProps {
   display?: string;
   width?: string;
   height?: string;
+  marginTop?: string;
   marginBottom?: string;
   marginLeft?: string;
   fontSize?: string;
@@ -24,6 +25,7 @@ const AccountButton: FC<PropsWithChildren<AccountButtonProps>> = ({
   display = "inline",
   width = "70%",
   height = "6vh",
+  marginTop = "0%",
   marginBottom = "0%",
   marginLeft = "0%",
   fontSize = "0.8em",
@@ -39,6 +41,7 @@ const AccountButton: FC<PropsWithChildren<AccountButtonProps>> = ({
         fontSize: fontSize,
         width: `calc(${width} - 7px)`,
         height: height,
+        marginTop: marginTop,
         marginBottom: marginBottom,
         marginLeft: marginLeft,
         display: display,

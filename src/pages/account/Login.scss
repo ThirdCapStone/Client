@@ -8,12 +8,18 @@
   border-radius: 30px;
 }
 
-.login-box-active {
-  animation: signup-to-login 0.8s ease-in-out;
+.login-box-signup {
+  animation: 0.8s signup-to-login ease-in-out;
+  & > * {
+    display: none;
+  }
 }
 
-.login-box-active > * {
-  display: none;
+.login-box-home {
+  animation: 0.8s home-to-login ease-in-out;
+  & > * {
+    display: none;
+  }
 }
 
 .login-title {
@@ -50,6 +56,23 @@
   50% {
     width: 0%;
     height: 0%;
+  }
+  100% {
+    width: 35%;
+    height: 75%;
+  }
+}
+
+@keyframes home-to-login {
+  0% {
+    width: 100%;
+    height: 100%;
+    padding: 100% 100%;
+  }
+  50% {
+    width: 0%;
+    height: 0%;
+    padding: 0% 0%;
   }
   100% {
     width: 35%;

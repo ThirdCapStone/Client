@@ -2,9 +2,14 @@ import "./alert.scss";
 import { AccountInput } from "../pages/ui/tools/Input";
 import { AccountButton } from "../pages/ui/tools/Button";
 import withReactContent from "sweetalert2-react-content";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCertificate,
+  faLock,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Account from "./http/account";
+import { validateID, validatePWD, validatePWDCheck } from "./validator";
 
 type iconType = "success" | "warning" | "error" | "info" | "question";
 
@@ -36,11 +41,67 @@ const showForgotPWDAlert = async (
   title: string,
   text: string,
   icon: iconType,
-  confirmButtonText: string,
-  timer: number,
-  width: number = 600,
-  timerProgressBar: boolean = false
-) => {};
+  confirmButtonText: string
+) => {
+  let [chatID, userID] = [false, ""];
+  let [chatPWD, userPWD] = [false, ""];
+  let [chatPWDCheck, userPWDCheck] = [false, ""];
+
+  await MySwal.fire({
+    icon: icon,
+    html: (
+      <div>
+        <h1 style={{ color: "white" }}>{title}</h1>
+        <hr style={{ backgroundColor: "white" }} />
+        {text}
+        <br />
+        <br />
+        <AccountInput
+          type="text"
+          className="id"
+          icon={faUser}
+          placeholder="아이디"
+          isChat={chatID}
+          onChange={(event) => (userID = event.target.value)}
+          onBlur={() => (chatID = false)}
+          onFocus={() => (chatID = true)}
+          validate={validateID(userID)}
+        />
+
+        <AccountInput
+          type="password"
+          className="pwd"
+          icon={faLock}
+          placeholder="변경할 비밀번호"
+          isChat={chatPWD}
+          onChange={(event) => (userPWD = event.target.value)}
+          onBlur={() => (chatPWD = false)}
+          onFocus={() => (chatPWD = true)}
+          validate={validatePWD(userPWD)}
+        />
+
+        <AccountInput
+          type="password"
+          className="pwd-check"
+          icon={faLock}
+          placeholder="비밀번호 재입력"
+          isChat={chatPWDCheck}
+          onChange={(event) => (userPWDCheck = event.target.value)}
+          onBlur={() => (chatPWDCheck = false)}
+          onFocus={() => (chatPWDCheck = true)}
+          validate={validatePWDCheck(userPWD, userPWDCheck)}
+        />
+        <AccountButton
+          type="submit"
+          onClick={() => MySwal.close()}
+          text={confirmButtonText}
+        />
+      </div>
+    ),
+    showCloseButton: true,
+    showConfirmButton: false,
+  });
+};
 
 const showEmailALert = async (
   email: string,
@@ -49,10 +110,9 @@ const showEmailALert = async (
   icon: iconType,
   confirmButtonText: string,
   timer: number,
-  width: number = 600,
   timerProgressBar: boolean = false
 ) => {
-  let timerInterval: string | number | NodeJS.Timer | undefined;
+  let timerInterval: any;
   let isChat: boolean = false;
   let verifyCode: string = "";
 
@@ -91,7 +151,6 @@ const showEmailALert = async (
     ),
     showCloseButton: true,
     showConfirmButton: false,
-    width: width,
     timer: timer,
     timerProgressBar: timerProgressBar,
     didOpen: () => {
@@ -105,8 +164,6 @@ const showEmailALert = async (
       clearInterval(timerInterval);
     },
   });
-
-  console.log("detected");
 
   return await Account.verifyEmail(email, verifyCode);
 };
@@ -122,4 +179,4 @@ const inputAlertTimer = (miliseconds: number) => {
   return `${minutes}:${minTwoDigits(seconds % 60)}`;
 };
 
-export { showAlert, showEmailALert, inputAlertTimer };
+export { showAlert, showForgotPWDAlert, showEmailALert, inputAlertTimer };

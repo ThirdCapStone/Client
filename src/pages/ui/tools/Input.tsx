@@ -9,15 +9,16 @@ interface InputProps {
   icon: IconDefinition;
   placeholder: string;
   disabled?: boolean;
-  value: string;
+  value?: string;
   isChat: boolean;
-  validate: Function;
+  validate?: string;
+  marginTop?: string;
   VerifyButton?: ReactNode;
   width?: string;
   height?: string;
   className?: string;
   pattern?: string;
-  onChange: ComponentProps<"input">["onChange"];
+  onChange?: ComponentProps<"input">["onChange"];
   onFocus?: ComponentProps<"input">["onFocus"];
   onBlur?: ComponentProps<"input">["onBlur"];
 }
@@ -31,19 +32,20 @@ const AccountInput = ({
   validate,
   disabled,
   VerifyButton,
+  marginTop,
   className,
   pattern,
   onChange,
   onFocus,
   onBlur,
   width = "80%",
-  height = "6vh",
+  height = "8vh",
 }: InputProps) => {
   return (
-    <>
+    <div>
       <div
         className={`container ${className}-container`}
-        style={{ width: width, height: height }}
+        style={{ width: width, height: height, marginTop: marginTop }}
       >
         <FontAwesomeIcon icon={icon} className="icon" />
         <input
@@ -53,16 +55,16 @@ const AccountInput = ({
           disabled={disabled}
           value={value}
           pattern={pattern}
-          onChange={onChange}
+          onChange={onChange ? onChange : undefined}
           onFocus={onFocus}
           onBlur={onBlur}
         />
       </div>
       {VerifyButton !== null ? VerifyButton : ""}
       <label className={`error ${className}-error`}>
-        {isChat ? validate(value) : ""}
+        {isChat && validate !== "" && validate !== undefined ? validate : ""}
       </label>
-    </>
+    </div>
   );
 };
 

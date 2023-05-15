@@ -1,29 +1,67 @@
 import "./Main.scss";
 
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/account/Login";
 import Signup from "./pages/account/Signup";
+import Home from "./pages/Home";
+import BeautifulMap from "./pages/Map";
+import AppBar from "./pages/ui/AppBar";
 
 const Main = () => {
   const [isSignup, setIsSignup] = useState(false);
+  const [isLogined, setIsLogined] = useState(false);
   const [isToSignup, setIsToSignup] = useState(false);
   const [isToLogin, setIsToLogin] = useState(false);
+  const [isToHome, setIsToHome] = useState(false);
+  const [homeToLogin, setHomeToLogin] = useState(false);
 
   return (
     <div className="main-container" data-theme="dark">
-      {isSignup ? (
-        <Signup
-          isMount={isToLogin}
-          setIsSignup={setIsSignup}
-          setIsMount={setIsToSignup}
-        />
-      ) : (
-        <Login
-          isMount={isToSignup}
-          setIsSignup={setIsSignup}
-          setIsMount={setIsToLogin}
-        />
-      )}
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/login"
+            Component={() =>
+              isSignup ? (
+                <Signup
+                  isMount={isToLogin}
+                  setIsSignup={setIsSignup}
+                  setIsMount={setIsToSignup}
+                />
+              ) : (
+                <Login
+                  isSignupMount={isToSignup}
+                  isHomeMount={isToHome}
+                  isLoginMount={homeToLogin}
+                  setIsSignup={setIsSignup}
+                  setIsHomeMount={setIsToHome}
+                  setIsSignupMount={setIsToLogin}
+                  setIsLogined={setIsLogined}
+                  setIsLoginMount={setHomeToLogin}
+                />
+              )
+            }
+          />
+          <Route
+            path="/home"
+            Component={() => (
+              <>
+                <AppBar />
+                <Home
+                  isHomeMount={isToHome}
+                  isLoginMount={homeToLogin}
+                  isLogined={isLogined}
+                  setIsHomeMount={setIsToHome}
+                  setIsLogined={setIsLogined}
+                  setIsLoginMount={setHomeToLogin}
+                />
+              </>
+            )}
+          />
+          <Route path="/maps" Component={() => <BeautifulMap />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
