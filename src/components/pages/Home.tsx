@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { Navigate } from "react-router-dom";
-import "./Home.scss";
+import "../styles/Home.scss";
 
 type PropsType = {
   isHomeMount: boolean;

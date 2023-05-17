@@ -1,4 +1,4 @@
-import "./AppBar.scss";
+import "../styles/AppBar.scss";
 import { Link } from "react-router-dom";
 
 const AppBar = () => {

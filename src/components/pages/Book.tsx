@@ -1,1 +1,1 @@
-import "./Book.scss";
+import "../styles/Book.scss";

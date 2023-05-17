@@ -1,4 +1,4 @@
-import "./Button.scss";
+import "../styles/Button.scss";
 
 import { ComponentProps, FC, PropsWithChildren } from "react";
 

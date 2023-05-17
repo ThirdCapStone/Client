@@ -1,4 +1,4 @@
-import "./Input.scss";
+import "../styles/Input.scss";
 
 import { ComponentProps, Dispatch, ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

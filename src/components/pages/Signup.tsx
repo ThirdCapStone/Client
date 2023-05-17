@@ -1,4 +1,4 @@
-import "./Signup.scss";
+import "../styles/Signup.scss";
 
 import { useState, ComponentProps, Dispatch } from "react";
 import {

@@ -1,4 +1,4 @@
-import "./Login.scss";
+import "../styles/Login.scss";
 
 import { useState, ComponentProps, Dispatch } from "react";
 import { Navigate } from "react-router-dom";
