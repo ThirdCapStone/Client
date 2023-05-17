@@ -1,0 +1,20 @@
+.msc-button {
+  position: relative;
+  display: inline;
+  cursor: pointer;
+  color: rgba(81, 241, 108);
+  background-color: #252525;
+  transform: background-color 0.4 ease, color 0.4 ease, box-shadow 0.4 ease;
+  border: 1px solid rgb(81, 241, 108);
+  bottom: 7px;
+}
+
+.msc-button:disabled {
+  opacity: 0.5;
+}
+
+.msc-button:hover {
+  background-color: rgb(81, 241, 108);
+  color: #252525;
+  box-shadow: 1px 1px 5px 3px rgb(81, 241, 108);
+}
