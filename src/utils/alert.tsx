@@ -1,6 +1,6 @@
 import "./alert.scss";
-import { AccountInput } from "../pages/ui/tools/Input";
-import { AccountButton } from "../pages/ui/tools/Button";
+import { AccountInput } from "../components/tools/Input";
+import { AccountButton } from "../components/tools/Button";
 import withReactContent from "sweetalert2-react-content";
 import {
   faCertificate,

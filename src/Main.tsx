@@ -2,11 +2,11 @@ import "./Main.scss";
 
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/account/Login";
-import Signup from "./pages/account/Signup";
-import Home from "./pages/Home";
-import BeautifulMap from "./pages/Map";
-import AppBar from "./pages/ui/AppBar";
+import Login from "./components/pages/Login";
+import Signup from "./components/pages/Signup";
+import Home from "./components/pages/Home";
+import BeautifulMap from "./components/pages/Map";
+import AppBar from "./components/tools/AppBar";
 
 const Main = () => {
   const [isSignup, setIsSignup] = useState(false);
