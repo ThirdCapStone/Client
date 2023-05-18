@@ -3,3 +3,31 @@
   margin-top: 5%;
   margin-bottom: -5%;
 }
+
+.swal2-html-container {
+  margin: 0.5em 1.6em !important;
+  user-select: none !important;
+}
+
+.swal2-html-container hr {
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  height: 1px;
+  margin-bottom: 1em;
+}
+
+.swal2-actions {
+  margin: 0 auto;
+}
+
+.swal2-shown > [aria-hidden="true"] {
+  transition: 0.3s filter;
+  filter: blur(4px) !important;
+
+  background: black;
+  overflow: hidden;
+}
+
+.swal2-toast-shown > [aria-hidden="true"] {
+  filter: blur(0px) !important;
+}
