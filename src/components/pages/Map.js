@@ -1,5 +1,5 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import "../styles/Map.scss";
+import "./styles/Map.scss";
 
 const BeautifulMap = () => {
   return (

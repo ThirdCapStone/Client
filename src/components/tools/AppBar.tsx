@@ -1,8 +1,7 @@
-import "../styles/AppBar.scss";
+import "./styles/AppBar.scss";
 import { Link } from "react-router-dom";
 
 const AppBar = () => {
-  console.log(window.location.href.includes("home"));
   return (
     <div className="app-bar">
       <Link

@@ -1,8 +1,7 @@
-import "../styles/Login.scss";
+import "./styles/Login.scss";
 
-import { useState, ComponentProps, Dispatch } from "react";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { showForgotPWDAlert } from "../../utils/alert";
 import { AccountInput, handleError } from "../tools/Input";
@@ -10,37 +9,25 @@ import { AccountButton } from "../tools/Button";
 import Account from "../../utils/http/account";
 import { validateID, validatePWD } from "../../utils/validator";
 import { showToast } from "../../utils/toast";
-import withReactContent from "sweetalert2-react-content";
 
-const mySwal = withReactContent(Swal);
-
-const Login = (props: {
-  isSignupMount: boolean;
-  isHomeMount: boolean;
-  isLoginMount: boolean;
-  setIsSignup: Dispatch<boolean>;
-  setIsSignupMount: Dispatch<boolean>;
-  setIsHomeMount: Dispatch<boolean>;
-  setIsLogined: Dispatch<boolean>;
-  setIsLoginMount: Dispatch<boolean>;
-}) => {
+const Login = (props) => {
   const [userID, setUserID] = useState("");
   const [userPWD, setUserPWD] = useState("");
   const [clicked, setClicked] = useState(false);
   const [chatID, setChatID] = useState(false);
   const [chatPWD, setChatPWD] = useState(false);
 
-  const detectEnter: ComponentProps<"form">["onKeyDown"] = (event) => {
+  const detectEnter = (event) => {
     if (event.key === "Enter") {
       const btn = document.querySelector(
         "div.login-box > form.login-form > button.outline"
-      ) as Element;
+      );
       const event = new Event("click", { bubbles: true });
       btn.dispatchEvent(event);
     }
   };
 
-  const submitLogin: ComponentProps<"button">["onClick"] = async (event) => {
+  const submitLogin = async (event) => {
     event.preventDefault();
     setClicked(true);
 
@@ -68,7 +55,7 @@ const Login = (props: {
     setClicked(false);
   };
 
-  const changeToSignup: ComponentProps<"button">["onClick"] = (event) => {
+  const changeToSignup = (event) => {
     props.setIsSignup(true);
     props.setIsSignupMount(true);
     setTimeout(() => {
@@ -76,7 +63,7 @@ const Login = (props: {
     }, 800);
   };
 
-  const changeToHome = (message: string) => {
+  const changeToHome = (message) => {
     showToast("success", message);
     props.setIsHomeMount(true);
     props.setIsLogined(true);
@@ -85,8 +72,6 @@ const Login = (props: {
     }, 800);
   };
 
-  let testChat = false;
-  let testID = "";
   return (
     <div
       className={`login-box ${props.isSignupMount ? `login-box-signup` : ``} ${

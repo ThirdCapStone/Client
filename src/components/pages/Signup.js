@@ -1,6 +1,6 @@
-import "../styles/Signup.scss";
+import "./styles/Signup.scss";
 
-import { useState, ComponentProps, Dispatch } from "react";
+import { useState } from "react";
 import {
   validateID,
   validatePWD,
@@ -22,11 +22,7 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Signup = (props: {
-  isMount: boolean;
-  setIsSignup: Dispatch<boolean>;
-  setIsMount: Dispatch<boolean>;
-}) => {
+const Signup = (props) => {
   const [userID, setUserID] = useState("");
   const [userPWD, setUserPWD] = useState("");
   const [userPWDCheck, setUserPWDCheck] = useState("");
@@ -50,7 +46,7 @@ const Signup = (props: {
     }, 800);
   };
 
-  const submitSignup: ComponentProps<"button">["onClick"] = async (event) => {
+  const submitSignup = async (event) => {
     event.preventDefault();
     if (validateID(userID) !== "") {
       handleError("id", setChatID);
@@ -94,13 +90,9 @@ const Signup = (props: {
     }
   };
 
-  const checkDuplicate = async (
-    inputUserID: string = "",
-    inputUserEmail: string = ""
-  ) => {
+  const checkDuplicate = async (inputUserID, inputUserEmail) => {
     const response = await Account.checkDuplicate(inputUserID, inputUserEmail);
     const message = response.data["message"];
-    console.log(response);
     switch (response.status) {
       case 200:
         showToast("success", message);
@@ -125,7 +117,7 @@ const Signup = (props: {
         className="signup-form"
         onKeyDown={(event) => {
           if (event.key === "Enter") {
-            const btn = document.querySelector("button.msc-button") as Element;
+            const btn = document.querySelector("button.msc-button");
             const event = new Event("click", { bubbles: true });
             btn.dispatchEvent(event);
           }
