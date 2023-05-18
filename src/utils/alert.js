@@ -6,23 +6,27 @@ import {
   faCertificate,
   faLock,
   faUser,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Account from "./http/account";
-import { validateID, validatePWD, validatePWDCheck } from "./validator";
-
-type iconType = "success" | "warning" | "error" | "info" | "question";
+import {
+  validateEmail,
+  validateID,
+  validatePWD,
+  validatePWDCheck,
+} from "./validator";
 
 const MySwal = withReactContent(Swal);
 
 const showAlert = (
-  title: string,
-  text: string,
-  icon: iconType,
-  confirmButtonText: string,
-  width: number = 600,
-  timer: number = 1000,
-  timerProgressBar: boolean = false
+  title,
+  text,
+  icon,
+  confirmButtonText,
+  width = 600,
+  timer = 1000,
+  timerProgressBar = false
 ) => {
   MySwal.fire({
     html: `<hr /><p>${text}`,
@@ -37,15 +41,11 @@ const showAlert = (
   });
 };
 
-const showForgotPWDAlert = async (
-  title: string,
-  text: string,
-  icon: iconType,
-  confirmButtonText: string
-) => {
+const showForgotPWDAlert = async (title, text, icon, confirmButtonText) => {
   let [chatID, userID] = [false, ""];
   let [chatPWD, userPWD] = [false, ""];
   let [chatPWDCheck, userPWDCheck] = [false, ""];
+  let [chatEmail, userEmail] = [false, ""];
 
   await MySwal.fire({
     icon: icon,
@@ -91,6 +91,24 @@ const showForgotPWDAlert = async (
           onFocus={() => (chatPWDCheck = true)}
           validate={validatePWDCheck(userPWD, userPWDCheck)}
         />
+        <AccountInput
+          type="text"
+          className="email"
+          icon={faEnvelope}
+          placeholder="이메일"
+          isChat={chatEmail}
+          onChange={(event) => (userEmail = event.target.value)}
+          onBlur={() => (chatEmail = false)}
+          onFocus={() => (chatEmail = true)}
+          validate={validateEmail(userEmail)}
+          VerifyButton={
+            <AccountButton
+              type="button"
+              text="이메일 확인"
+              onClick={() => console.log("detected")}
+            />
+          }
+        />
         <AccountButton
           type="submit"
           onClick={() => MySwal.close()}
@@ -104,17 +122,17 @@ const showForgotPWDAlert = async (
 };
 
 const showEmailALert = async (
-  email: string,
-  title: string,
-  text: string,
-  icon: iconType,
-  confirmButtonText: string,
-  timer: number,
-  timerProgressBar: boolean = false
+  email,
+  title,
+  text,
+  icon,
+  confirmButtonText,
+  timer,
+  timerProgressBar = false
 ) => {
-  let timerInterval: any;
-  let isChat: boolean = false;
-  let verifyCode: string = "";
+  let timerInterval;
+  let isChat = false;
+  let verifyCode = "";
 
   await MySwal.fire({
     icon: icon,
@@ -155,7 +173,7 @@ const showEmailALert = async (
     timerProgressBar: timerProgressBar,
     didOpen: () => {
       timerInterval = setInterval(() => {
-        const b = document.querySelector("b.left-time") as Element;
+        const b = document.querySelector("b.left-time");
         timer -= 1000;
         b.textContent = inputAlertTimer(timer);
       }, 1000);
@@ -168,11 +186,11 @@ const showEmailALert = async (
   return await Account.verifyEmail(email, verifyCode);
 };
 
-const minTwoDigits = (n: number) => {
+const minTwoDigits = (n) => {
   return (n < 10 ? "0" : "") + n;
 };
 
-const inputAlertTimer = (miliseconds: number) => {
+const inputAlertTimer = (miliseconds) => {
   const seconds = Number(Math.floor(miliseconds / 1000).toFixed(0));
   const minutes = Number(Math.floor(seconds / 60).toFixed(0));
 

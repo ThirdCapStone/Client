@@ -1,4 +1,4 @@
-const validateID = (userID: string) => {
+const validateID = (userID) => {
   if (userID === "") {
     return "아이디를 입력해주세요.";
   } else if (userID.length < 8) {
@@ -10,7 +10,7 @@ const validateID = (userID: string) => {
   return "";
 };
 
-const validatePWD = (userPWD: string) => {
+const validatePWD = (userPWD) => {
   if (userPWD === "") {
     return "비밀번호를 입력해주세요.";
   } else if (userPWD.length < 8) {
@@ -22,7 +22,7 @@ const validatePWD = (userPWD: string) => {
   return "";
 };
 
-const validatePWDCheck = (userPWD: string, userPWDCheck: string) => {
+const validatePWDCheck = (userPWD, userPWDCheck) => {
   let result = validatePWD(userPWDCheck);
   if (result === "") {
     if (userPWD !== userPWDCheck) {
@@ -33,7 +33,7 @@ const validatePWDCheck = (userPWD: string, userPWDCheck: string) => {
   return result;
 };
 
-const validateNickname = (userNickname: string) => {
+const validateNickname = (userNickname) => {
   if (userNickname === "") {
     return "닉네임을 입력해주세요.";
   } else if (userNickname.length < 5) {
@@ -45,7 +45,7 @@ const validateNickname = (userNickname: string) => {
   return "";
 };
 
-const validateEmail = (userEmail: string) => {
+const validateEmail = (userEmail) => {
   const reEmail = new RegExp(
     "^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
   );
@@ -58,7 +58,7 @@ const validateEmail = (userEmail: string) => {
   return "";
 };
 
-const validatePhone = (userPhone: string) => {
+const validatePhone = (userPhone) => {
   const rePhone = new RegExp("[0-9]{3}-[0-9]{4}-[0-9]{4}");
   if (userPhone === "") {
     return "핸드폰 번호를 입력해주세요.";

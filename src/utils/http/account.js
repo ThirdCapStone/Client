@@ -1,12 +1,11 @@
 import axios from "axios";
-const HOST_URL = "http://movies_combine.rainbow5079.me:8000";
+const HOST_URL = "http://localhost:8000";
 const headers = {
   "Content-Type": "application/json",
 };
-axios.defaults.withCredentials = true;
 
 class Account {
-  static login = async (userID: string, userPWD: string) => {
+  static login = async (userID, userPWD) => {
     const response = await axios
       .post(
         `${HOST_URL}/account/login`,
@@ -29,11 +28,11 @@ class Account {
   };
 
   static signup = async (
-    userID: string,
-    userPWD: string,
-    userNickname: string,
-    userEmail: string,
-    userPhone: string
+    userID,
+    userPWD,
+    userNickname,
+    userEmail,
+    userPhone
   ) => {
     const response = await axios
       .put(
@@ -59,7 +58,7 @@ class Account {
     return response;
   };
 
-  static checkDuplicate = async (userID: string, userNickname: string) => {
+  static checkDuplicate = async (userID, userNickname) => {
     const response = await axios
       .post(
         `${HOST_URL}/account/check`,
@@ -82,7 +81,7 @@ class Account {
     return response;
   };
 
-  static sendEmail = async (userEmail: string) => {
+  static sendEmail = async (userEmail) => {
     const response = await axios
       .post(
         `${HOST_URL}/account/email/send`,
@@ -103,7 +102,7 @@ class Account {
 
     return response;
   };
-  static verifyEmail = async (userEmail: string, verifyCode: string) => {
+  static verifyEmail = async (userEmail, verifyCode) => {
     const response = await axios
       .post(
         `${HOST_URL}/account/email/cancel`,

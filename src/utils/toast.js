@@ -2,8 +2,6 @@ import "./toast.scss";
 import "animate.css";
 import Swal from "sweetalert2/src/sweetalert2.js";
 
-type iconTypes = "success" | "warning" | "error" | "info" | "question";
-
 const Toast = Swal.mixin({
   toast: true,
   position: "top",
@@ -28,7 +26,7 @@ const Toast = Swal.mixin({
   },
 });
 
-const showToast = (iconType: iconTypes, text: string) => {
+const showToast = (iconType, text) => {
   Toast.fire({
     icon: iconType,
     text: text,

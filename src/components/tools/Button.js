@@ -2,22 +2,7 @@ import "./styles/Button.scss";
 
 import { ComponentProps, FC, PropsWithChildren } from "react";
 
-interface AccountButtonProps {
-  type: "button" | "submit" | "reset" | undefined;
-  onClick: ComponentProps<"button">["onClick"];
-  text: string;
-  display?: string;
-  width?: string;
-  height?: string;
-  marginTop?: string;
-  marginBottom?: string;
-  marginLeft?: string;
-  fontSize?: string;
-  disabled?: boolean;
-  className?: string;
-}
-
-const AccountButton: FC<PropsWithChildren<AccountButtonProps>> = ({
+const AccountButton = ({
   type,
   className,
   onClick,
@@ -30,7 +15,7 @@ const AccountButton: FC<PropsWithChildren<AccountButtonProps>> = ({
   marginLeft = "0%",
   fontSize = "0.8em",
   disabled = false,
-}: AccountButtonProps) => {
+}) => {
   return (
     <button
       type={type}

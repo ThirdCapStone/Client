@@ -1,7 +1,7 @@
 import "./styles/AppBar.scss";
 import { Link } from "react-router-dom";
 
-const AppBar = () => {
+const AppBar = (props) => {
   return (
     <div className="app-bar">
       <Link
