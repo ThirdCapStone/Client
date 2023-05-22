@@ -10,8 +10,8 @@ class Account {
       .post(
         `${HOST_URL}/account/login`,
         {
-          id: userID.trim(),
-          password: userPWD.trim(),
+          id: userID,
+          password: userPWD,
         },
         {
           headers: headers,
@@ -38,11 +38,11 @@ class Account {
       .put(
         `${HOST_URL}/account/signup`,
         {
-          id: userID.trim(),
-          password: userPWD.trim(),
-          nickname: userNickname.trim(),
-          email: userEmail.trim(),
-          phone: userPhone.trim(),
+          id: userID,
+          password: userPWD,
+          nickname: userNickname,
+          email: userEmail,
+          phone: userPhone,
         },
         {
           headers: headers,
@@ -66,8 +66,8 @@ class Account {
         {
           headers: headers,
           params: {
-            id: userID.trim(),
-            nickname: userNickname.trim(),
+            id: userID,
+            nickname: userNickname,
           },
         }
       )
