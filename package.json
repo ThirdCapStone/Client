@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://www.kobis.or.kr",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
@@ -30,6 +31,7 @@
     "sass": "^1.62.0",
     "sweetalert2": "^11.7.5",
     "sweetalert2-react-content": "^5.0.7",
+    "swiper": "^9.3.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

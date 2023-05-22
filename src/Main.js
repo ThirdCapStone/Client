@@ -60,7 +60,15 @@ const Main = () => {
               </>
             )}
           />
-          <Route path="/maps" Component={() => <BeautifulMap />} />
+          <Route
+            path="/maps"
+            Component={() => (
+              <>
+                <AppBar />
+                <BeautifulMap />
+              </>
+            )}
+          />
           <Route path="/book" Component={() => <Book />} />
         </Routes>
       </BrowserRouter>
