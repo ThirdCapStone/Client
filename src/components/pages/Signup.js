@@ -154,7 +154,7 @@ const Signup = (props) => {
           onChange={(event) => setUserID(event.target.value)}
           onBlur={() => setChatID(false)}
           onFocus={() => setChatID(true)}
-          width="40%"
+          width="60%"
           disabled={verifiedID}
         />
 
@@ -215,7 +215,7 @@ const Signup = (props) => {
           onChange={(event) => setUserNickname(event.target.value)}
           onBlur={() => setChatNickname(false)}
           onFocus={() => setChatNickname(true)}
-          width="40%"
+          width="60%"
           disabled={verifiedNickname}
         />
 
@@ -268,7 +268,7 @@ const Signup = (props) => {
           onChange={(event) => setUserEmail(event.target.value)}
           onBlur={() => setChatEmail(false)}
           onFocus={() => setChatEmail(true)}
-          width="40%"
+          width="60%"
         />
 
         <AccountInput
