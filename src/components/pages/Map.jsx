@@ -17,7 +17,7 @@ const BeautifulMap = () => {
     <>
       <Map
         center={{ lat: location.lat, lng: location.long }}
-        style={{ width: "100%", height: "100%" }}
+        className="map-container"
       >
         <MapMarker
           className="myPos"
