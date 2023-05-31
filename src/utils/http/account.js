@@ -1,4 +1,5 @@
 import axios from "axios";
+import API_KEY from "./env";
 const HOST_URL = "http://localhost:8000";
 const headers = {
   "Content-Type": "application/json",
@@ -124,6 +125,49 @@ class Account {
 
     return response;
   };
-}
+  static forgotPassword = async (userID, userPWD, userEmail) => {
+    const response = await axios
+      .patch(
+        `${HOST_URL}/account/update/password`,
+        {
+          id: userID,
+          email: userEmail,
+          new_password: userPWD,
+        },
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
 
+    return response;
+  };
+  static loadUserInfo = async (accountSeq = null, userID = null) => {
+    const response = await axios
+      .get(
+        `${HOST_URL}/account`,
+        {},
+        {
+          headers: Object.assign(headers, { access_token: API_KEY }),
+          params: {
+            account_seq: accountSeq,
+            id: userID,
+          },
+        }
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return response;
+  };
+}
 export default Account;
