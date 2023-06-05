@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import Home from "./components/pages/Home";
-import BeautifulMap from "./components/pages/Map";
+import MCMap from "./components/pages/Map";
 import AppBar from "./components/tools/AppBar";
 import Book from "./components/pages/Book";
 
@@ -48,15 +48,13 @@ const Main = () => {
             path="/home"
             Component={() => (
               <>
-                <AppBar />
-                <Home
-                  isHomeMount={isToHome}
+                <AppBar
                   isLoginMount={homeToLogin}
-                  isLogined={isLogined}
-                  setIsHomeMount={setIsToHome}
                   setIsLogined={setIsLogined}
                   setIsLoginMount={setHomeToLogin}
+                  isLogined={isLogined}
                 />
+                <Home isHomeMount={isToHome} setIsHomeMount={setIsToHome} />
               </>
             )}
           />
@@ -65,7 +63,7 @@ const Main = () => {
             Component={() => (
               <>
                 <AppBar />
-                <BeautifulMap />
+                <MCMap />
               </>
             )}
           />
