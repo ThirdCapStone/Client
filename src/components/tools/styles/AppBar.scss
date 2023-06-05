@@ -38,9 +38,11 @@
   transition: transform 0.3s ease;
 }
 
-.item::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+.item:hover::after {
+  &:not(.active) {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 }
 
 .item-icon {
