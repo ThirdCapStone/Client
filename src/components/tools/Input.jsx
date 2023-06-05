@@ -33,7 +33,7 @@ const AccountInput = ({
           disabled={disabled}
           value={value}
           pattern={pattern}
-          onChange={onChange ? onChange : undefined}
+          onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
         />
