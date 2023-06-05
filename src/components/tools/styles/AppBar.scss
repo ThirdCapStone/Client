@@ -38,9 +38,22 @@
   transition: transform 0.3s ease;
 }
 
-.item:hover::after {
+.item::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.item-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.item-login {
+  font-weight: bold;
+  color: transparent;
+  -webkit-text-stroke: 1px white;
 }
 
 .active {
@@ -49,4 +62,9 @@
   &:focus {
     background-color: black;
   }
+}
+
+.fa-circle-user {
+  color: white !important;
+  font-size: 1.5em;
 }

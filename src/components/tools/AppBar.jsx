@@ -1,5 +1,7 @@
 import "./styles/AppBar.scss";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 const AppBar = (props) => {
   return (
@@ -29,6 +31,25 @@ const AppBar = (props) => {
       >
         예매
       </Link>
+      <div style={{ marginLeft: "20%" }} />
+      {props.isLogined ? (
+        <Link className="item-icon">
+          <FontAwesomeIcon icon={faCircleUser} />
+        </Link>
+      ) : (
+        <Link
+          className={`item item-login`}
+          to="/login"
+          onClick={() => {
+            props.setIsLoginMount(true);
+            setTimeout(() => {
+              props.setIsLoginMount(false);
+            }, 800);
+          }}
+        >
+          로그인
+        </Link>
+      )}
     </div>
   );
 };
