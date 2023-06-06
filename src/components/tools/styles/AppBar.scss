@@ -38,8 +38,8 @@
   transition: transform 0.3s ease;
 }
 
-.item:hover::after {
-  &:not(.active) {
+.item:hover {
+  &:not(.active)::after {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
