@@ -1,66 +1,52 @@
 import "./styles/Map.scss";
-import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import { useState, useEffect } from "react";
 import Theater from "../../utils/http/theater";
-import Loading from "../tools/Loading";
+
+const { kakao } = window;
 
 const MCMap = () => {
-  const [location, setLocation] = useState({ lat: 0, long: 0 });
-  const [theaters, setTheaters] = useState([]);
-  const [theaterLoading, setTheaterLoading] = useState(true);
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      setLocation({
-        lat: position.coords.latitude,
-        long: position.coords.longitude,
-      });
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
+  let theaters = [];
   useEffect(() => {
-    let theater = [];
     Theater.loadTheaterList().then((response) => {
       response.data.forEach((city) => {
         city["gus"].forEach((gu) => {
-          theater.push(...gu["theaters"]);
+          theaters = theaters.concat(gu["theaters"]);
         });
       });
+      navigator.geolocation.getCurrentPosition(
+        (location) => {
+          const container = document.getElementById("map");
+          const options = {
+            center: new kakao.maps.LatLng(
+              location.coords.latitude,
+              location.coords.longitude
+            ),
+            level: 3,
+          };
+          const kakaoMap = new kakao.maps.Map(container, options);
+          const cluster = new kakao.maps.MarkerClusterer({
+            map: kakaoMap,
+            averageCenter: true,
+            minLevel: 8,
+          });
+          let markers = [];
+          theaters.forEach((theater) => {
+            markers.push(
+              new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(theater.lat, theater.long),
+              })
+            );
+          });
+          cluster.addMarkers(markers);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     });
-    setTheaters(theater);
-    setTheaterLoading(false);
   }, []);
-  console.log(location);
 
-  if (location.lat !== 0 && location.long !== 0 && !theaterLoading) {
-    return (
-      <>
-        <Map
-          center={{ lat: location.lat, lng: location.long }}
-          className="map-container"
-        >
-          <MarkerClusterer averageCenter={true} minLevel={8}>
-            {theaters.map((theater, idx) => {
-              if (idx == theaters.length - 1) {
-                setTheaterLoading(false);
-              }
-              return (
-                <MapMarker
-                  key={theater.theater_seq}
-                  position={{ lat: theater.lat, lng: theater.long }}
-                >
-                  {theater.place_name}
-                </MapMarker>
-              );
-            })}
-          </MarkerClusterer>
-        </Map>
-      </>
-    );
-  } else {
-    return <Loading />;
-  }
+  return <div id="map" style={{ width: "100vw", height: "100%" }}></div>;
 };
 
 export default MCMap;
