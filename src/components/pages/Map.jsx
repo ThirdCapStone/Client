@@ -1,5 +1,5 @@
 import "./styles/Map.scss";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Theater from "../../utils/http/theater";
 
 const { kakao } = window;
@@ -21,9 +21,21 @@ const MCMap = () => {
               location.coords.latitude,
               location.coords.longitude
             ),
-            level: 3,
+            level: 5,
           };
           const kakaoMap = new kakao.maps.Map(container, options);
+          let personMarkerImage = new kakao.maps.MarkerImage(
+            "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png",
+            new kakao.maps.Size(42, 42)
+          );
+          let personMarker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(
+              location.coords.latitude,
+              location.coords.longitude
+            ),
+            image: personMarkerImage,
+          });
+          personMarker.setMap(kakaoMap);
           const cluster = new kakao.maps.MarkerClusterer({
             map: kakaoMap,
             averageCenter: true,
