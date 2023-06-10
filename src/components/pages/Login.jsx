@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { showForgotPWDAlert } from "../../utils/alert";
 import { AccountInput, handleError } from "../tools/Input";
-import { AccountButton } from "../tools/Button";
+import { MSCButton } from "../tools/Button";
 import Account from "../../utils/http/account";
 import { validateID, validatePWD } from "../../utils/validator";
 import { showToast } from "../../utils/toast";
@@ -123,7 +123,7 @@ const Login = (props) => {
           비밀번호를 잊으셨나요?
         </div>
 
-        <AccountButton
+        <MSCButton
           type="submit"
           className="outline"
           text="로그인"
@@ -146,7 +146,4 @@ const Login = (props) => {
   );
 };
 
-const Custom = () => {
-  return <div>Hello World</div>;
-};
 export default Login;

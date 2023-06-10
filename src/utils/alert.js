@@ -1,6 +1,6 @@
 import "./alert.scss";
 import { AccountInput } from "../components/tools/Input";
-import { AccountButton } from "../components/tools/Button";
+import { MSCButton } from "../components/tools/Button";
 import withReactContent from "sweetalert2-react-content";
 import {
   faCertificate,
@@ -101,15 +101,8 @@ const showForgotPWDAlert = async (title, text, icon, confirmButtonText) => {
           onBlur={() => (chatEmail = false)}
           onFocus={() => (chatEmail = true)}
           validate={validateEmail(userEmail)}
-          VerifyButton={
-            <AccountButton
-              type="button"
-              text="이메일 확인"
-              onClick={() => console.log("detected")}
-            />
-          }
         />
-        <AccountButton
+        <MSCButton
           type="submit"
           onClick={() => MySwal.close()}
           text={confirmButtonText}
@@ -118,10 +111,11 @@ const showForgotPWDAlert = async (title, text, icon, confirmButtonText) => {
     ),
     showCloseButton: true,
     showConfirmButton: false,
+    willClose: () => {},
   });
 };
 
-const showEmailALert = async (
+const showEmailAlert = async (
   email,
   title,
   text,
@@ -157,7 +151,7 @@ const showEmailALert = async (
           />
         }
         남은 시간: <b className="left-time">{inputAlertTimer(timer)}</b>
-        <AccountButton
+        <MSCButton
           display="block"
           marginLeft="15%"
           type="submit"
@@ -197,4 +191,4 @@ const inputAlertTimer = (miliseconds) => {
   return `${minutes}:${minTwoDigits(seconds % 60)}`;
 };
 
-export { showAlert, showForgotPWDAlert, showEmailALert, inputAlertTimer };
+export { showAlert, showForgotPWDAlert, showEmailAlert, inputAlertTimer };

@@ -1,8 +1,6 @@
 import "./styles/Button.scss";
 
-import { ComponentProps, FC, PropsWithChildren } from "react";
-
-const AccountButton = ({
+const MSCButton = ({
   type,
   className,
   onClick,
@@ -37,4 +35,4 @@ const AccountButton = ({
   );
 };
 
-export { AccountButton };
+export { MSCButton };

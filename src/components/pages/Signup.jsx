@@ -10,10 +10,10 @@ import {
   validatePhone,
 } from "../../utils/validator";
 import { showToast } from "../../utils/toast";
-import { showEmailALert } from "../../utils/alert";
+import { showEmailAlert } from "../../utils/alert";
 import Account from "../../utils/http/account";
 import { AccountInput, handleError } from "../tools/Input";
-import { AccountButton } from "../tools/Button";
+import { MSCButton } from "../tools/Button";
 import {
   faUser,
   faLock,
@@ -129,7 +129,7 @@ const Signup = (props) => {
           icon={faUser}
           placeholder="아이디"
           VerifyButton={
-            <AccountButton
+            <MSCButton
               type="button"
               className="outline"
               text="중복확인"
@@ -193,7 +193,7 @@ const Signup = (props) => {
           isChat={chatNickname}
           validate={validateNickname(userNickname)}
           VerifyButton={
-            <AccountButton
+            <MSCButton
               type="button"
               className="outline"
               text="중복확인"
@@ -228,7 +228,7 @@ const Signup = (props) => {
           isChat={chatEmail}
           validate={validateEmail(userEmail)}
           VerifyButton={
-            <AccountButton
+            <MSCButton
               type="button"
               className="outline"
               text="이메일 확인"
@@ -239,7 +239,7 @@ const Signup = (props) => {
                 e.preventDefault();
                 if (validateEmail(userEmail) == "") {
                   await Account.sendEmail(userEmail);
-                  const response = await showEmailALert(
+                  const response = await showEmailAlert(
                     userEmail,
                     "이메일확인",
                     "이메일을 입력해주세요",
@@ -284,7 +284,7 @@ const Signup = (props) => {
           onFocus={() => setChatPhone(true)}
         />
 
-        <AccountButton
+        <MSCButton
           type="submit"
           className="outline"
           text="회원가입"
