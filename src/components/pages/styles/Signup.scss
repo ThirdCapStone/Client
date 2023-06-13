@@ -1,3 +1,11 @@
+.signup-container {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .signup-box {
   display: flex;
   width: 99vw;
@@ -15,6 +23,17 @@
   animation: login-to-signup 0.8s ease-in-out;
   & > * {
     display: none;
+  }
+}
+
+.cancle-button {
+  color: rgba(255, 0, 0, 0.9);
+  border: 1px solid rgba(255, 0, 0, 0.9);
+
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.9);
+    box-shadow: 1px 1px 5px 3px rgba(255, 0, 0, 0.9);
+    color: white;
   }
 }
 

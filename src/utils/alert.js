@@ -19,25 +19,32 @@ import {
 
 const MySwal = withReactContent(Swal);
 
-const showAlert = (
-  title,
-  text,
-  icon,
-  confirmButtonText,
-  width = 600,
-  timer = 1000,
-  timerProgressBar = false
-) => {
-  MySwal.fire({
-    html: `<hr /><p>${text}`,
-    title: title,
-    icon: icon,
-    width: width,
-    confirmButtonText: confirmButtonText,
-    showCancelButton: true,
-    showDenyButton: true,
-    timer: timer,
-    timerProgressBar: timerProgressBar,
+const showTheaterAlert = async (theater) => {
+  await MySwal.fire({
+    html: (
+      <>
+        <h3 style={{ color: "white" }}>{theater.place_name}</h3>
+        <div>{theater.address}</div>
+
+        <MSCButton
+          type="submit"
+          onClick={() => {
+            window.location.href = `/theater/${theater.theater_seq}`;
+          }}
+          marginTop="5vh"
+          text="영화관 이동"
+        />
+        <MSCButton
+          type="submit"
+          onClick={() => MySwal.close()}
+          text="닫기"
+          marginTop="2vh"
+          className="close-button"
+        />
+      </>
+    ),
+    showCloseButton: true,
+    showConfirmButton: false,
   });
 };
 
@@ -191,4 +198,9 @@ const inputAlertTimer = (miliseconds) => {
   return `${minutes}:${minTwoDigits(seconds % 60)}`;
 };
 
-export { showAlert, showForgotPWDAlert, showEmailAlert, inputAlertTimer };
+export {
+  showTheaterAlert,
+  showForgotPWDAlert,
+  showEmailAlert,
+  inputAlertTimer,
+};

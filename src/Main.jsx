@@ -8,6 +8,8 @@ import Home from "./components/pages/Home";
 import MCMap from "./components/pages/Map";
 import AppBar from "./components/tools/AppBar";
 import Book from "./components/pages/Book";
+import Movie from "./components/pages/Movie";
+import MovieDetail from "./components/pages/MovieDetail";
 
 const Main = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -22,7 +24,7 @@ const Main = () => {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/login"
+            path="login"
             Component={() =>
               isSignup ? (
                 <Signup
@@ -45,7 +47,7 @@ const Main = () => {
             }
           />
           <Route
-            path="/home"
+            path="home"
             Component={() => (
               <>
                 <AppBar
@@ -59,7 +61,26 @@ const Main = () => {
             )}
           />
           <Route
-            path="/maps"
+            path="movie"
+            Component={() => (
+              <>
+                <AppBar />
+                <Movie />
+              </>
+            )}
+          />
+
+          <Route
+            path="movie/:movieCode"
+            Component={() => (
+              <>
+                <AppBar />
+                <MovieDetail />
+              </>
+            )}
+          />
+          <Route
+            path="map"
             Component={() => (
               <>
                 <AppBar />
@@ -67,7 +88,15 @@ const Main = () => {
               </>
             )}
           />
-          <Route path="/book" Component={() => <Book />} />
+          <Route
+            path="book"
+            Component={() => (
+              <>
+                <AppBar />
+                <Book />
+              </>
+            )}
+          />
         </Routes>
       </BrowserRouter>
     </div>

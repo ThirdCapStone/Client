@@ -13,15 +13,23 @@ const AppBar = (props) => {
         }`}
         to="/home"
       >
-        홈 화면
+        홈
       </Link>
       <Link
         className={`item ${
-          window.location.href.includes("maps") ? "active" : ""
+          window.location.href.includes("movie") ? "active" : ""
         }`}
-        to="/maps"
+        to="/movie"
       >
-        맵 보기
+        영화
+      </Link>
+      <Link
+        className={`item ${
+          window.location.href.includes("map") ? "active" : ""
+        }`}
+        to="/map"
+      >
+        맵
       </Link>
       <Link
         className={`item ${
@@ -31,25 +39,6 @@ const AppBar = (props) => {
       >
         예매
       </Link>
-      <div style={{ marginLeft: "20%" }} />
-      {props.isLogined ? (
-        <Link className="item-icon">
-          <FontAwesomeIcon icon={faCircleUser} />
-        </Link>
-      ) : (
-        <Link
-          className={`item item-login`}
-          to="/login"
-          onClick={() => {
-            props.setIsLoginMount(true);
-            setTimeout(() => {
-              props.setIsLoginMount(false);
-            }, 800);
-          }}
-        >
-          로그인
-        </Link>
-      )}
     </div>
   );
 };

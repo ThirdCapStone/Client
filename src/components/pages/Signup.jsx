@@ -112,191 +112,164 @@ const Signup = (props) => {
   };
 
   return (
-    <div className={`signup-box ${props.isMount ? `signup-box-active` : ``}`}>
-      <form
-        className="signup-form"
-        onKeyDown={(event) => {
-          if (event.key === "Enter") {
-            const btn = document.querySelector("button.msc-button");
-            const event = new Event("click", { bubbles: true });
-            btn.dispatchEvent(event);
-          }
-        }}
-      >
-        <AccountInput
-          type="text"
-          className="id"
-          icon={faUser}
-          placeholder="아이디"
-          VerifyButton={
-            <MSCButton
-              type="button"
-              className="outline"
-              text="중복확인"
-              width="15%"
-              marginLeft="5%"
-              onClick={async (e) => {
-                e.preventDefault();
-                if (validateID(userID) === "") {
-                  const status = await checkDuplicate(userID);
-                  if (status === 200) {
-                    setVerifiedID(true);
+    <div className="signup-container">
+      <div className={`signup-box ${props.isMount ? `signup-box-active` : ``}`}>
+        <form
+          className="signup-form"
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              const btn = document.querySelector("button.msc-button");
+              const event = new Event("click", { bubbles: true });
+              btn.dispatchEvent(event);
+            }
+          }}
+        >
+          <AccountInput
+            type="text"
+            className="id"
+            icon={faUser}
+            placeholder="아이디"
+            VerifyButton={
+              <MSCButton
+                type="button"
+                className="outline"
+                text="중복확인"
+                width="15%"
+                marginLeft="5%"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (validateID(userID) === "") {
+                    const status = await checkDuplicate(userID);
+                    if (status === 200) {
+                      setVerifiedID(true);
+                    }
+                  } else {
+                    handleError("id", setChatID);
                   }
-                } else {
-                  handleError("id", setChatID);
-                }
-              }}
-            />
-          }
-          value={userID}
-          isChat={chatID}
-          validate={validateID(userID)}
-          onChange={(event) => setUserID(event.target.value)}
-          onBlur={() => setChatID(false)}
-          onFocus={() => setChatID(true)}
-          width="40%"
-          disabled={verifiedID}
-        />
+                }}
+              />
+            }
+            value={userID}
+            isChat={chatID}
+            validate={validateID(userID)}
+            onChange={(event) => setUserID(event.target.value)}
+            onBlur={() => setChatID(false)}
+            onFocus={() => setChatID(true)}
+            width="40%"
+            disabled={verifiedID}
+          />
 
-        <AccountInput
-          type="password"
-          className="pwd"
-          icon={faLock}
-          placeholder="비밀번호"
-          value={userPWD}
-          isChat={chatPWD}
-          validate={validatePWD(userPWD)}
-          onChange={(event) => setUserPWD(event.target.value)}
-          onBlur={() => setChatPWD(false)}
-          onFocus={() => setChatPWD(true)}
-        />
+          <AccountInput
+            type="password"
+            className="pwd"
+            icon={faLock}
+            placeholder="비밀번호"
+            value={userPWD}
+            isChat={chatPWD}
+            validate={validatePWD(userPWD)}
+            onChange={(event) => setUserPWD(event.target.value)}
+            onBlur={() => setChatPWD(false)}
+            onFocus={() => setChatPWD(true)}
+          />
 
-        <AccountInput
-          type="password"
-          className="pwd-check"
-          icon={faLock}
-          placeholder="비밀번호 재입력"
-          value={userPWDCheck}
-          isChat={chatPWDCheck}
-          validate={validatePWDCheck(userPWD, userPWDCheck)}
-          onChange={(event) => setUserPWDCheck(event.target.value)}
-          onBlur={() => setChatPWDCheck(false)}
-          onFocus={() => setChatPWDCheck(true)}
-        />
+          <AccountInput
+            type="password"
+            className="pwd-check"
+            icon={faLock}
+            placeholder="비밀번호 재입력"
+            value={userPWDCheck}
+            isChat={chatPWDCheck}
+            validate={validatePWDCheck(userPWD, userPWDCheck)}
+            onChange={(event) => setUserPWDCheck(event.target.value)}
+            onBlur={() => setChatPWDCheck(false)}
+            onFocus={() => setChatPWDCheck(true)}
+          />
 
-        <AccountInput
-          type="text"
-          className="nickname"
-          icon={faUserTag}
-          placeholder="닉네임"
-          value={userNickname}
-          isChat={chatNickname}
-          validate={validateNickname(userNickname)}
-          VerifyButton={
-            <MSCButton
-              type="button"
-              className="outline"
-              text="중복확인"
-              width="15%"
-              marginLeft="5%"
-              onClick={async (e) => {
-                e.preventDefault();
-                if (validateNickname(userNickname) === "") {
-                  const status = await checkDuplicate(userNickname);
-                  if (status === 200) {
-                    setVerifiedNickname(true);
+          <AccountInput
+            type="text"
+            className="nickname"
+            icon={faUserTag}
+            placeholder="닉네임"
+            value={userNickname}
+            isChat={chatNickname}
+            validate={validateNickname(userNickname)}
+            VerifyButton={
+              <MSCButton
+                type="button"
+                className="outline"
+                text="중복확인"
+                width="15%"
+                marginLeft="5%"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (validateNickname(userNickname) === "") {
+                    const status = await checkDuplicate(userNickname);
+                    if (status === 200) {
+                      setVerifiedNickname(true);
+                    }
+                  } else {
+                    handleError("nickname", setChatNickname);
                   }
-                } else {
-                  handleError("nickname", setChatNickname);
-                }
-              }}
-            />
-          }
-          onChange={(event) => setUserNickname(event.target.value)}
-          onBlur={() => setChatNickname(false)}
-          onFocus={() => setChatNickname(true)}
-          width="40%"
-          disabled={verifiedNickname}
-        />
+                }}
+              />
+            }
+            onChange={(event) => setUserNickname(event.target.value)}
+            onBlur={() => setChatNickname(false)}
+            onFocus={() => setChatNickname(true)}
+            width="40%"
+            disabled={verifiedNickname}
+          />
 
-        <AccountInput
-          type="email"
-          className="email"
-          icon={faEnvelope}
-          placeholder="이메일 (someone@example.com)"
-          value={userEmail}
-          isChat={chatEmail}
-          validate={validateEmail(userEmail)}
-          VerifyButton={
-            <MSCButton
-              type="button"
-              className="outline"
-              text="이메일 확인"
-              width="15%"
-              marginLeft="5%"
-              onClick={async (e) => {
-                let leftTime = 1000 * 60 * 3;
-                e.preventDefault();
-                if (validateEmail(userEmail) == "") {
-                  await Account.sendEmail(userEmail);
-                  const response = await showEmailAlert(
-                    userEmail,
-                    "이메일확인",
-                    "이메일을 입력해주세요",
-                    "question",
-                    "제출하기",
-                    leftTime,
-                    false
-                  );
-                  const message = response.data["message"];
-                  switch (response.status) {
-                    case 200:
-                      showToast("success", message);
-                      break;
-                    case 401:
-                      showToast("warning", message);
-                      break;
-                    case 500:
-                      showToast("error", message);
-                  }
-                } else {
-                  handleError("email", setChatEmail);
-                }
-              }}
-            />
-          }
-          onChange={(event) => setUserEmail(event.target.value)}
-          onBlur={() => setChatEmail(false)}
-          onFocus={() => setChatEmail(true)}
-          width="40%"
-        />
+          <AccountInput
+            type="email"
+            className="email"
+            icon={faEnvelope}
+            placeholder="이메일 (someone@example.com)"
+            value={userEmail}
+            isChat={chatEmail}
+            validate={validateEmail(userEmail)}
+            onChange={(event) => setUserEmail(event.target.value)}
+            onBlur={() => setChatEmail(false)}
+            onFocus={() => setChatEmail(true)}
+          />
 
-        <AccountInput
-          type="tel"
-          className="phone"
-          icon={faPhone}
-          placeholder="전화번호 (000-0000-0000)"
-          value={userPhone}
-          isChat={chatPhone}
-          validate={validatePhone(userPhone)}
-          onChange={(event) => setUserPhone(event.target.value)}
-          onBlur={() => setChatPhone(false)}
-          onFocus={() => setChatPhone(true)}
-        />
+          <AccountInput
+            type="tel"
+            className="phone"
+            icon={faPhone}
+            placeholder="전화번호 (000-0000-0000)"
+            value={userPhone}
+            isChat={chatPhone}
+            validate={validatePhone(userPhone)}
+            onChange={(event) => setUserPhone(event.target.value)}
+            onBlur={() => setChatPhone(false)}
+            onFocus={() => setChatPhone(true)}
+          />
 
-        <MSCButton
-          type="submit"
-          className="outline"
-          text="회원가입"
-          display="block"
-          width="50%"
-          height="8vh"
-          marginLeft="25%"
-          fontSize="1.6em"
-          onClick={submitSignup}
-        />
-      </form>
-      <div onClick={() => toLogin()}> Back </div>
+          <MSCButton
+            type="submit"
+            className="outline"
+            text="회원가입"
+            display="block"
+            width="50%"
+            height="8vh"
+            marginLeft="25%"
+            fontSize="1.6em"
+            onClick={submitSignup}
+          />
+          <MSCButton
+            width="50%"
+            marginTop="2vh"
+            text="돌아가기"
+            className="cancle-button"
+            type="button"
+            onClick={() => toLogin()}
+          >
+            {" "}
+            Back{" "}
+          </MSCButton>
+        </form>
+      </div>
     </div>
   );
 };

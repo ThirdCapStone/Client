@@ -1,0 +1,20 @@
+.movie-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+  overflow-y: auto;
+  margin-bottom: 10vh;
+}
+
+.movie-box {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  width: 90vw;
+  height: 500vh;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 50px;
+  column-gap: 50px;
+}

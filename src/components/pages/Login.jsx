@@ -73,75 +73,77 @@ const Login = (props) => {
   };
 
   return (
-    <div
-      className={`login-box ${props.isSignupMount ? `login-box-signup` : ``} ${
-        props.isLoginMount ? `login-box-home` : ``
-      }`}
-    >
-      {props.isHomeMount ? <Navigate to="/home" replace /> : null}
-      <div className="login-title">Login</div>
-      <form className="login-form" onKeyDown={detectEnter}>
-        <AccountInput
-          type="text"
-          icon={faUser}
-          placeholder="아이디"
-          className="id"
-          value={userID}
-          isChat={chatID}
-          validate={validateID(userID)}
-          onChange={(event) => {
-            setUserID(event.target.value);
-          }}
-          onFocus={() => setChatID(true)}
-          onBlur={() => setChatID(false)}
-        />
-        <AccountInput
-          type="password"
-          icon={faLock}
-          placeholder="비밀번호"
-          className="pwd"
-          value={userPWD}
-          isChat={chatPWD}
-          validate={validatePWD(userPWD)}
-          onChange={(event) => {
-            setUserPWD(event.target.value);
-          }}
-          onFocus={() => setChatPWD(true)}
-          onBlur={() => setChatPWD(false)}
-        />
-        <div
-          className="forgot"
-          onClick={async () => {
-            await showForgotPWDAlert(
-              "비밀번호 찾기",
-              "비밀번호를 변경하세요.",
-              "question",
-              "변경하기"
-            );
-          }}
-        >
-          비밀번호를 잊으셨나요?
-        </div>
+    <div className="login-container">
+      <div
+        className={`login-box ${
+          props.isSignupMount ? `login-box-signup` : ``
+        } ${props.isLoginMount ? `login-box-home` : ``}`}
+      >
+        {props.isHomeMount ? <Navigate to="/home" replace /> : null}
+        <div className="login-title">Login</div>
+        <form className="login-form" onKeyDown={detectEnter}>
+          <AccountInput
+            type="text"
+            icon={faUser}
+            placeholder="아이디"
+            className="id"
+            value={userID}
+            isChat={chatID}
+            validate={validateID(userID)}
+            onChange={(event) => {
+              setUserID(event.target.value);
+            }}
+            onFocus={() => setChatID(true)}
+            onBlur={() => setChatID(false)}
+          />
+          <AccountInput
+            type="password"
+            icon={faLock}
+            placeholder="비밀번호"
+            className="pwd"
+            value={userPWD}
+            isChat={chatPWD}
+            validate={validatePWD(userPWD)}
+            onChange={(event) => {
+              setUserPWD(event.target.value);
+            }}
+            onFocus={() => setChatPWD(true)}
+            onBlur={() => setChatPWD(false)}
+          />
+          <div
+            className="forgot"
+            onClick={async () => {
+              await showForgotPWDAlert(
+                "비밀번호 찾기",
+                "비밀번호를 변경하세요.",
+                "question",
+                "변경하기"
+              );
+            }}
+          >
+            비밀번호를 잊으셨나요?
+          </div>
 
-        <MSCButton
-          type="submit"
-          className="outline"
-          text="로그인"
-          display="block"
-          fontSize="1.6em"
-          height="8vh"
-          marginLeft="15%"
-          onClick={submitLogin}
-          disabled={clicked}
-        />
-        <br />
-        <div>
-          계정이 아직 없으신가요? &nbsp;
-          <span className="signup" onClick={changeToSignup}>
-            회원가입
-          </span>
-        </div>
-      </form>
+          <MSCButton
+            type="submit"
+            className="outline"
+            text="로그인"
+            display="block"
+            fontSize="1.6em"
+            height="8vh"
+            marginLeft="15%"
+            onClick={submitLogin}
+            disabled={clicked}
+          />
+          <br />
+          <div>
+            계정이 아직 없으신가요? &nbsp;
+            <span className="signup" onClick={changeToSignup}>
+              회원가입
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

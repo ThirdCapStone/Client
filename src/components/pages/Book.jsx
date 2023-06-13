@@ -1,8 +1,7 @@
 import "./styles/Book.scss";
-import Test from "../../utils/pay";
 
 const Book = () => {
-  return <Test />;
+  return <div className="book-container">Asd</div>;
 };
 
 export default Book;

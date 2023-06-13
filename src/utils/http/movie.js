@@ -5,7 +5,7 @@ const headers = {
 
 class Movie {
   static loadRankMoviesFromReservation = async () => {
-    const URL = "/kobis/business/main/searchMainDailyBoxOffice.do";
+    const URL = "http://localhost:8000/movie";
     const response = await axios
       .post(URL, {
         headers: headers,
@@ -20,12 +20,28 @@ class Movie {
     return response;
   };
 
-  static getTheaterList = async () => {
-    const URL =
-      "/kobis/business/mast/thea/findBasareaCdList.do?CSRFToken=HgMAHNIl1l4gllyVmp7LOG6bExrD_B6SlsXo17bfqSQ";
-
+  static loadAllMovieInfo = async () => {
+    const URL = `http://localhost:8000/movie/`;
     const response = await axios
-      .post(URL, { headers: headers })
+      .get(URL, {
+        headers: headers,
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return response;
+  };
+
+  static loadMovieDetailInfo = async (movieCode) => {
+    const URL = `http://localhost:8000/movie/${movieCode}`;
+    const response = await axios
+      .get(URL, {
+        headers: headers,
+      })
       .then((response) => {
         return response;
       })
